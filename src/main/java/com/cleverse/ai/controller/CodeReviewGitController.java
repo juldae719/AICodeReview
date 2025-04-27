@@ -60,7 +60,7 @@ public class CodeReviewGitController {
         // 원격 저장소 URL, 로컬 저장소 경로, 비교 시작 커밋 ID를 인자로 전달
         String remoteRepoUrl = "https://github.com/juldae719/AICodeReview.git";
         File localRepoDir = new File("F:\\project\\ai\\CleverseAICodeReview\\CleverseAICodeReview");
-        String baseCommitId = "065a2d6";
+        String baseCommitId = "ec86441";
         StringBuilder result = new StringBuilder();
         try {
             // 클론 또는 pull 처리
