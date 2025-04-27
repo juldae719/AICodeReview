@@ -58,8 +58,8 @@ public class CodeReviewGitController {
 	@RequestMapping("/gitDiff")
     public String gitDiff() {
         // 원격 저장소 URL, 로컬 저장소 경로, 비교 시작 커밋 ID를 인자로 전달
-        String remoteRepoUrl = "https://github.com/ryujt/CodeSage.git";
-        File localRepoDir = new File("F:/project/ai/AICodeSage/CodeSage");
+        String remoteRepoUrl = "https://github.com/juldae719/AICodeReview.git";
+        File localRepoDir = new File("F:\\project\\ai\\CleverseAICodeReview\\CleverseAICodeReview");
         String baseCommitId = "80e6c0b";
         StringBuilder result = new StringBuilder();
         try {
