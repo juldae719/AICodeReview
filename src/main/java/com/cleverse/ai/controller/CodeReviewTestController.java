@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Controller
-@RequestMapping(value={"/api/codereview"})
+@RequestMapping(value={"/api/codereview/test"})
 public class CodeReviewTestController {
 
 	@RequestMapping("/")
