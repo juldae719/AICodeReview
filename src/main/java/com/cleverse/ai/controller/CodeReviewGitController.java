@@ -195,9 +195,9 @@ public class CodeReviewGitController {
                     for (int lineNumber = 0; lineNumber < lines.size(); lineNumber++) {
                         String marker = "";
                         if (addedLines.contains(lineNumber)) {
-                            marker = "+"; // 추가된 라인
+                            marker = "[+]"; // 추가된 라인
                         } else if (deletedLines.contains(lineNumber)) {
-                            marker = "-"; // 삭제된 라인
+                            marker = "[-]"; // 삭제된 라인
                         }
                         result.append(String.format("%4d: %s %s\n", lineNumber + 1, marker, lines.get(lineNumber)));
                     }
@@ -214,18 +214,19 @@ public class CodeReviewGitController {
                       codingModels.add(QWEN25CODER32);
 
                         String contents = result.toString();
+                        result.setLength(0);
                         System.out.println(contents);
-                        String codeReviewSystemMessage = "한국어로 답변해줘";
+                        String codeReviewSystemMessage = "한국어로 답변해주세요. 응답 형식에 맞게 답변 주세요.";
                         String codeReviewUserMessagePrefix = String.format(""
                 				+ " 당신은 숙련된 Java, Javascript, Python 소프트웨어 엔지니어입니다. "
-                				+ " 다음 코드 변경 사항을 검토하고, 잠재적인 문제점 또는 개선 사항을 제안해주세요. "
-                				+ " GitLab 이슈와 MR description을 참고하되, 코드 변경과 직접 관련된 리뷰만 제공하며, 지정된 JSON 형식으로만 응답하세요. "
                 				+ "  "
-                				+ " 중요 지침: "
+                				+ " 지정된 JSON 형식으로만 응답하세요. "
                 				+ "  "
-                				+ " 응답 형식: 반드시 아래 구조의 JSON 배열로만 응답하세요. 이외의 부가적인 말은 포함하지 마세요. "
+                				+ " 중요 지침: 반드시 아래 구조의 JSON 배열로만 응답하세요. 이외의 부가적인 말과 '''json 등은 포함하지 마세요."
+                				+ "  "
+                				+ " 응답 형식: "
                 				+ " [ {{ \"new_line\": int, \"comment\": \"review comment\" }}, ... ] "
-                				+ " 리뷰 범위: '+'로 시작하는 라인에 대해서만 리뷰를 작성하세요. "
+                				+ " 리뷰 범위: 주석은 제거하고 '[+]'로 시작하는 라인에 대해서만 리뷰를 작성하세요. '[+]'가 없다면 []로 응답해 주세요"
                 				+ " 변수 / 클래스 등이 실제로 정의되어 있는지 여부는 주어진 코드에 명시되지 않은 경우 판단하지 마세요. "
                 				+ " 모든 응답은 한국어로 작성해야 합니다. "
                 				+ " 입력 데이터: "
@@ -234,7 +235,7 @@ public class CodeReviewGitController {
 //                				+ " MR의 description: 제목: {mr_title} 설명: {mr_description} "
 //                				+ " Reference Docs: {docs} "
                 				+ " 코드 변경 사항: %s "
-                				+ " 주의: 위 예시는 참고용이며, 응답은 반드시 주어진 코드와 조건에 맞게 생성해야 합니다. "
+//                				+ " 주의: 위 예시는 참고용이며, 응답은 반드시 주어진 코드와 조건에 맞게 생성해야 합니다. "
                 				, contents);;
 
                         Map<String,String> responses = new HashMap<>();
